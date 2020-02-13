@@ -6,13 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <Button
+        android:id="@+id/identify_breed_button"
+        android:layout_width="300sp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Identifiy the balla"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/identify_dog_button"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:text="Identify the dog"
+        app:layout_constraintBottom_toTopOf="@+id/identify_breed_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/search_breed_button"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:text="Search dog breed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/identify_breed_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
