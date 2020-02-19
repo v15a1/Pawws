@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">MobileCourseWork1</string>
+    <string name="identify_the_breed">Identify the Breed</string>
+    <string name="identify_the_dog">Identify the dog</string>
+    <string name="search_dog_breed">Search dog breed</string>
+    <string name="welcome_to">WELCOME TO</string>
+    <string name="app_title">p<b>aww</b>s</string>
+    <string name="navigation_home">Home</string>
+    <string name="navigation_identify_dog">Identify Dogs</string>
+    <string name="navigation_identify_breed">Identify Breeds</string>
+    <string name="navigation_search_breed">Search Breed</string>
+    <string name="dog_of_a_certain_breed">Dog of a certain breed</string>
+
+    <string-array name="dog_array">
+        <item>French Bulldog</item>
+        <item>Shetland Sheepdog</item>
+        <item>Pomeranian</item>
+        <item>Samoyed</item>
+        <item>Bull Mastiff</item>
+        <item>Doberman</item>
+    </string-array>
 </resources>
