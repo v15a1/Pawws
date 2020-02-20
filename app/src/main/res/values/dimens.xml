@@ -2,4 +2,6 @@
 <resources>
     <dimen name="button_width">300dp</dimen>
     <dimen name="button_height">60dp</dimen>
+    <dimen name="layout_spacer">20dp</dimen>
+    <dimen name="spinner_label_margin">9dp</dimen>
 </resources>

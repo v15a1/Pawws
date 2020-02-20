@@ -10,11 +10,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
-import java.util.Objects;
 
-public class IdentifyDogActivity extends AppCompatActivity {
+public class IdentifyDogActivity extends AppCompatActivity{
 
     private static final String ACTIVITY_NAME = "IdentifyDogActivity";
     private static final String ACTIVITY_TITLE_NAME = "Identify Dogs";
@@ -45,4 +46,5 @@ public class IdentifyDogActivity extends AppCompatActivity {
             return true;
         } return super.onOptionsItemSelected(item);
     }
+
 }

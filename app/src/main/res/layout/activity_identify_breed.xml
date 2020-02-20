@@ -4,27 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IdentifyBreedActivity">
+    tools:context=".IdentifyBreedActivity"
+    android:background="@drawable/select_breed_background">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="344dp"
+        android:id="@+id/breed_image_view"
+        android:layout_width="0dp"
         android:layout_height="327dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars"
-        android:contentDescription="@string/dog_of_a_certain_breed" />
+        tools:srcCompat="@tools:sample/avatars" />
 
-    <Spinner
-        android:id="@+id/identify_breed_spinner"
-        android:layout_width="250dp"
-        android:layout_height="25dp"
-        android:entries="@array/dog_array"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/submit_breed_button"
+        app:layout_constraintTop_toBottomOf="@+id/breed_image_view"
+        android:layout_marginLeft="@dimen/layout_spacer"
+        android:layout_marginRight="@dimen/layout_spacer">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_breed_spinner_label"
+            android:layout_marginStart="@dimen/spinner_label_margin"/>
+
+        <Spinner
+            android:id="@+id/identify_breed_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/breed_image_view" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submit_breed_button"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_marginLeft="@dimen/layout_spacer"
+        android:layout_marginRight="@dimen/layout_spacer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
+        android:onClick="alertAnswer"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
