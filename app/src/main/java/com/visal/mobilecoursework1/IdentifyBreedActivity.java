@@ -2,10 +2,8 @@ package com.visal.mobilecoursework1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,24 +12,46 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.visal.mobilecoursework1.ui_components.AlertDialogComponent;
+import com.visal.mobilecoursework1.utils.DogDetails;
+
+import java.util.List;
 
 public class IdentifyBreedActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String ACTIVITY_NAME = "IdentifyBreedActivity";
     private static final String ACTIVITY_TITLE_NAME = "Identify Breeds";
 
-    Spinner identifyBreedSpinner;
-    Button submitBreedButton;
+    DogDetails dogDetails = new DogDetails();
+
+    private Spinner identifyBreedSpinner;
+    private Button submitBreedButton;
+    private ImageView dogImageView;
+    List<String> dogImageResourceList;
+    String resource;
+    int resourceId;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identify_breed);
+//        Log.d(ACTIVITY_NAME, Integer.toString(resourceIndex));
 
+        //initializing and accessing values after application is created
         submitBreedButton = (Button) findViewById(R.id.submit_breed_button);
+        dogImageView = (ImageView) findViewById(R.id.breed_image_view);
+
+        //Assigning the dogs
+        resource = dogDetails.getRandomDog(); //randomizing the displayed image
+        Log.d(ACTIVITY_NAME, resource);
+        resourceId = getResources().getIdentifier(resource, "drawable", "com.visal.mobilecoursework1");
+        dogImageView.setImageResource(resourceId);
+
 
         //Setting items into the spinner
         //https://www.tutorialspoint.com/how-to-get-spinner-value-in-android
@@ -82,7 +102,11 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
     //method that displays an alertbox with the answer
     public void alertAnswer(View view) {
         AlertDialogComponent.showSingleButtonAlert(
-                IdentifyBreedActivity.this, submitBreedButton, "DOGSSSS", "adjfasdfasfaskfjaskfjaksdfjksd", "NEXT", falsegit );
+                IdentifyBreedActivity.this, submitBreedButton, "DOGSSSS", "adjfasdfasfaskfjaskfjaksdfjksd", "NEXT", false);
+        resource = dogDetails.getRandomDog();
+        resourceId = getResources().getIdentifier(resource, "drawable", "com.visal.mobilecoursework1");
+        dogImageView.setImageResource(resourceId);
+
     }
 
 
