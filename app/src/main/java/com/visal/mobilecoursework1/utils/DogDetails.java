@@ -19,15 +19,15 @@ public class DogDetails {
     public DogDetails() {
         dogBreeds = new String[]{
           "n02108915",
-//          "n02105855",
+          "n02105855",
 //          "n02112018",
 //          "n02111889",
-//          "",
-//          "",
-//          "",
-//          "",
-//          "",
-//          "",
+//          "n02110185",
+//          "n02110063",
+//          "n02108551",
+//          "n02108422",
+//          "n02107142",
+//          "n02106662",
         };
         dogImageCount = new Integer[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
         addDogDetails();
@@ -35,7 +35,7 @@ public class DogDetails {
 
     private void addDogDetails(){
         dogDetails.put("n02108915", "French Bulldog");
-//        dogDetails.put("n02105855", "Shetland Sheepdog");
+        dogDetails.put("n02105855", "Shetland Sheepdog");
 //        dogDetails.put("n02112018", "Pomeranian");
 //        dogDetails.put("n02111889", "Samoyed");
 //        dogDetails.put("n02110185", "Siberian Husky");
@@ -46,13 +46,13 @@ public class DogDetails {
 //        dogDetails.put("n02106662", "German Shepard");
     }
 
-    public String getRandomDog(){
+    public Dog getRandomDog(){
         Random random = new Random();
 
-        int randBreedIndex = random.nextInt(dogBreeds.length);
-        Log.d("DogDetails", Integer.toString(randBreedIndex));
+        int randBreed = random.nextInt(dogBreeds.length);
         int randDogNumIndex = random.nextInt(dogImageCount.length);
-        Log.d("DogDetails", Integer.toString(randDogNumIndex));
-        return dogBreeds[randBreedIndex] + "_" + dogImageCount[randDogNumIndex];
+
+        String resource = dogBreeds[randBreed] + "_" + dogImageCount[randDogNumIndex];
+        return new Dog(dogDetails.get(dogBreeds[randBreed]), resource);
     }
 }

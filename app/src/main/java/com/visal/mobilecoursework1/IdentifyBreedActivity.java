@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.visal.mobilecoursework1.ui_components.AlertDialogComponent;
+import com.visal.mobilecoursework1.utils.Dog;
 import com.visal.mobilecoursework1.utils.DogDetails;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
     private Button submitBreedButton;
     private ImageView dogImageView;
     List<String> dogImageResourceList;
-    String resource;
+    Dog dogObject;
     int resourceId;
 
 
@@ -47,9 +48,9 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
         dogImageView = (ImageView) findViewById(R.id.breed_image_view);
 
         //Assigning the dogs
-        resource = dogDetails.getRandomDog(); //randomizing the displayed image
-        Log.d(ACTIVITY_NAME, resource);
-        resourceId = getResources().getIdentifier(resource, "drawable", "com.visal.mobilecoursework1");
+        dogObject = dogDetails.getRandomDog(); //randomizing the displayed image
+        Log.d(ACTIVITY_NAME, dogObject.toString());
+        resourceId = getResources().getIdentifier(dogObject.getResourceName(), "drawable", "com.visal.mobilecoursework1");
         dogImageView.setImageResource(resourceId);
 
 
@@ -103,8 +104,8 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
     public void alertAnswer(View view) {
         AlertDialogComponent.showSingleButtonAlert(
                 IdentifyBreedActivity.this, submitBreedButton, "DOGSSSS", "adjfasdfasfaskfjaskfjaksdfjksd", "NEXT", false);
-        resource = dogDetails.getRandomDog();
-        resourceId = getResources().getIdentifier(resource, "drawable", "com.visal.mobilecoursework1");
+        dogObject = dogDetails.getRandomDog();
+        resourceId = getResources().getIdentifier(dogObject.getResourceName(), "drawable", "com.visal.mobilecoursework1");
         dogImageView.setImageResource(resourceId);
 
     }

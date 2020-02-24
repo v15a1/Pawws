@@ -25,6 +25,12 @@ public class AlertDialogComponent {
         correctAlertTitle.setTextSize(20F);
         correctAlertTitle.setTypeface(null, Typeface.BOLD);
 
+        wrongAlertTitle.setTextColor(Color.parseColor("#4dffa0"));
+        wrongAlertTitle.setText("WRONG!");
+        wrongAlertTitle.setPadding(30, 30, 20, 30);
+        wrongAlertTitle.setTextSize(20F);
+        wrongAlertTitle.setTypeface(null, Typeface.BOLD);
+
         alertDialogBuilder
                 .setCustomTitle(correctAlertTitle)
                 .setMessage(message)
