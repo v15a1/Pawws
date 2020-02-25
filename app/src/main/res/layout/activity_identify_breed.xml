@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IdentifyBreedActivity"
+    tools:context=".activities.IdentifyBreedActivity"
     android:background="@drawable/select_breed_background">
 
     <ImageView
@@ -55,5 +55,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:onClick="alertAnswer"/>
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

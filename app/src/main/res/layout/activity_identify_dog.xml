@@ -4,15 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IdentifyDogActivity">
+    tools:context=".activities.IdentifyDogActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="identify dogs"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/dog_image_one"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="@dimen/layout_spacer"
+            android:layout_marginTop="@dimen/layout_spacer"
+            android:layout_gravity="center"
+            />
+
+        <ImageView
+            android:id="@+id/dog_image_two"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="@dimen/layout_spacer"
+            android:layout_gravity="center"
+            />
+
+
+        <ImageView
+            android:id="@+id/dog_image_three"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="@dimen/layout_spacer"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="@dimen/layout_spacer"/>
+        <Button
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:text="@string/submit"
+            android:layout_gravity="center"
+            style="@style/Widget.AppCompat.Button.Colored"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

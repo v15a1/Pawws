@@ -11,16 +11,16 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".SearchBreedActivity"
+            android:name=".activities.SearchBreedActivity"
             android:theme="@style/PageTheme" />
         <activity
-            android:name=".IdentifyBreedActivity"
+            android:name=".activities.IdentifyBreedActivity"
             android:theme="@style/PageTheme" />
         <activity
-            android:name=".IdentifyDogActivity"
+            android:name=".activities.IdentifyDogActivity"
             android:theme="@style/PageTheme" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".activities.SplashScreen"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:theme="@style/AppTheme" />
     </application>
 

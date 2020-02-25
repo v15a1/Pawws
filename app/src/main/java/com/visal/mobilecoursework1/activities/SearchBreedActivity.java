@@ -1,4 +1,4 @@
-package com.visal.mobilecoursework1;
+package com.visal.mobilecoursework1.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+
+import com.visal.mobilecoursework1.R;
 
 public class SearchBreedActivity extends AppCompatActivity {
 

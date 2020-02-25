@@ -1,4 +1,4 @@
-package com.visal.mobilecoursework1;
+package com.visal.mobilecoursework1.activities;
 
 import android.content.Intent;
 import android.os.Bundle;

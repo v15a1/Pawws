@@ -1,10 +1,12 @@
-package com.visal.mobilecoursework1;
+package com.visal.mobilecoursework1.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,7 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.visal.mobilecoursework1.R;
 import com.visal.mobilecoursework1.ui_components.AlertDialogComponent;
 import com.visal.mobilecoursework1.utils.Dog;
 import com.visal.mobilecoursework1.utils.DogDetails;
@@ -30,8 +34,7 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
 
     private Spinner identifyBreedSpinner;
     private Button submitBreedButton;
-    private ImageView dogImageView;
-    List<String> dogImageResourceList;
+    String selectedSpinnerItem;
     Dog dogObject;
     int resourceId;
 
@@ -45,7 +48,7 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
 
         //initializing and accessing values after application is created
         submitBreedButton = (Button) findViewById(R.id.submit_breed_button);
-        dogImageView = (ImageView) findViewById(R.id.breed_image_view);
+        ImageView dogImageView = (ImageView) findViewById(R.id.breed_image_view);
 
         //Assigning the dogs
         dogObject = dogDetails.getRandomDog(); //randomizing the displayed image
@@ -53,10 +56,22 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
         resourceId = getResources().getIdentifier(dogObject.getResourceName(), "drawable", "com.visal.mobilecoursework1");
         dogImageView.setImageResource(resourceId);
 
+        submitBreedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (submitBreedButton.getText().equals("NEXT")){
+                    startActivity(new Intent(IdentifyBreedActivity.this, IdentifyBreedActivity.class));
+                }else{
+                    checkAnswer(dogObject, selectedSpinnerItem);
+                }
+            }
+        });
+
 
         //Setting items into the spinner
         //https://www.tutorialspoint.com/how-to-get-spinner-value-in-android
         identifyBreedSpinner = (Spinner) findViewById(R.id.identify_breed_spinner);
+        identifyBreedSpinner.setEnabled(true);        //allowing user to interact with the spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.dog_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         identifyBreedSpinner.setAdapter(adapter);
@@ -90,9 +105,8 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
         //getting the selected value in
-        String selectedVal = parent.getItemAtPosition(position).toString();
+        selectedSpinnerItem = parent.getSelectedItem().toString();
     }
 
     @Override
@@ -100,15 +114,35 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
 
     }
 
-    //method that displays an alertbox with the answer
-    public void alertAnswer(View view) {
-        AlertDialogComponent.showSingleButtonAlert(
-                IdentifyBreedActivity.this, submitBreedButton, "DOGSSSS", "adjfasdfasfaskfjaskfjaksdfjksd", "NEXT", false);
-        dogObject = dogDetails.getRandomDog();
-        resourceId = getResources().getIdentifier(dogObject.getResourceName(), "drawable", "com.visal.mobilecoursework1");
-        dogImageView.setImageResource(resourceId);
+    public void checkAnswer(Dog dog, String spinnerItemName){
+        TextView correctAlertTitle = new TextView(this);
+        TextView wrongAlertTitle = new TextView(this);
+        String correctAnswerMessage = "The selected answer is correct. Well done!!!";
+        String wrongAnswerMessage = "Your answer is incorrect. the correct answer is " + dog.getBreed() + ". Better luck next time";
 
+        correctAlertTitle.setTextColor(Color.parseColor("#1BE59D"));
+        correctAlertTitle.setText("CORRECT!");
+        correctAlertTitle.setPadding(40, 30, 20, 30);
+        correctAlertTitle.setTextSize(20F);
+        correctAlertTitle.setTypeface(null, Typeface.BOLD);
+
+        wrongAlertTitle.setTextColor(Color.parseColor("#FF0000"));
+        wrongAlertTitle.setText("WRONG!");
+        wrongAlertTitle.setPadding(40, 30, 20, 30);
+        wrongAlertTitle.setTextSize(20F);
+        wrongAlertTitle.setTypeface(null, Typeface.BOLD);
+
+        if (dog.getBreed().equals(spinnerItemName)){
+            AlertDialogComponent.IdentifyBreedAnswerAlert(this, submitBreedButton, correctAlertTitle, correctAnswerMessage,false);
+            identifyBreedSpinner.setEnabled(false);     //disabling the spinner
+        }else if(spinnerItemName.equals("Select a Breed")){
+            AlertDialogComponent.emptySelectionAlert(this);
+        }else{
+            AlertDialogComponent.IdentifyBreedAnswerAlert(this, submitBreedButton, wrongAlertTitle, wrongAnswerMessage,false);
+            identifyBreedSpinner.setEnabled(false);     //disabling the spinner
+        }
     }
+
 
 
 }
