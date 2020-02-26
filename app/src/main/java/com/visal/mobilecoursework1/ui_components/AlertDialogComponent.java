@@ -9,7 +9,7 @@ import android.widget.TextView;
 public class AlertDialogComponent {
 
 
-    public static void IdentifyBreedAnswerAlert(Context context, final Button button, TextView title, String message, boolean cancelable){
+    public static void identifyBreedAlert(Context context, final Button button, TextView title, String message, boolean cancelable){
         androidx.appcompat.app.AlertDialog.Builder alertDialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(context);
 
         alertDialogBuilder
@@ -20,6 +20,23 @@ public class AlertDialogComponent {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         button.setText("NEXT");
+                    }
+                });
+
+        androidx.appcompat.app.AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    public static void identifyDogAlert(Context context, TextView title, String message, boolean cancelable){
+        androidx.appcompat.app.AlertDialog.Builder alertDialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(context);
+
+        alertDialogBuilder
+                .setCustomTitle(title)
+                .setMessage(message)
+                .setCancelable(cancelable)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
                     }
                 });
 

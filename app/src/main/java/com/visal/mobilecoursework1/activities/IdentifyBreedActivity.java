@@ -23,8 +23,6 @@ import com.visal.mobilecoursework1.ui_components.AlertDialogComponent;
 import com.visal.mobilecoursework1.utils.Dog;
 import com.visal.mobilecoursework1.utils.DogDetails;
 
-import java.util.List;
-
 public class IdentifyBreedActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String ACTIVITY_NAME = "IdentifyBreedActivity";
@@ -133,12 +131,12 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
         wrongAlertTitle.setTypeface(null, Typeface.BOLD);
 
         if (dog.getBreed().equals(spinnerItemName)){
-            AlertDialogComponent.IdentifyBreedAnswerAlert(this, submitBreedButton, correctAlertTitle, correctAnswerMessage,false);
+            AlertDialogComponent.identifyBreedAlert(this, submitBreedButton, correctAlertTitle, correctAnswerMessage,false);
             identifyBreedSpinner.setEnabled(false);     //disabling the spinner
         }else if(spinnerItemName.equals("Select a Breed")){
             AlertDialogComponent.emptySelectionAlert(this);
         }else{
-            AlertDialogComponent.IdentifyBreedAnswerAlert(this, submitBreedButton, wrongAlertTitle, wrongAnswerMessage,false);
+            AlertDialogComponent.identifyBreedAlert(this, submitBreedButton, wrongAlertTitle, wrongAnswerMessage,false);
             identifyBreedSpinner.setEnabled(false);     //disabling the spinner
         }
     }
