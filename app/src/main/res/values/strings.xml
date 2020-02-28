@@ -15,6 +15,10 @@
     <string name="select_alert_message">Select a Breed</string>
     <string name="correct_answer_message">CORRECT!</string>
     <string name="incorrect_answer_message">WRONG!</string>
+    <string name="search_button_text">Search</string>
+    <string name="enter_the_breed_hint">Enter the breed</string>
+    <string name="stop">Stop</string>
+    <string name="submit_button_title">Submit</string>
 
     <string-array name="dog_array">
         <item>Select a Breed</item>
