@@ -3,30 +3,23 @@ package com.visal.mobilecoursework1.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.visal.mobilecoursework1.R;
 import com.visal.mobilecoursework1.utils.DogDetails;
 
 public class SearchBreedActivity extends AppCompatActivity {
 
-    private static final String ACTIVITY_NAME = SearchBreedActivity.class.getSimpleName();
+    private static final String TAG = SearchBreedActivity.class.getSimpleName();
     private static final String ACTIVITY_TITLE_NAME = "Search for Breeds";
     private static final int DELAY = 5000;
 
@@ -57,7 +50,7 @@ public class SearchBreedActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            Log.i(ACTIVITY_NAME, "ActionBar != null");
+            Log.i(TAG, "ActionBar != null");
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(ACTIVITY_TITLE_NAME);
         }
@@ -65,7 +58,7 @@ public class SearchBreedActivity extends AppCompatActivity {
         submitSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(ACTIVITY_NAME, "Pressed the submit button");
+                Log.d(TAG, "Pressed the submit button");
 
 
                 searchValue = searchBar.getText().toString();
@@ -94,8 +87,8 @@ public class SearchBreedActivity extends AppCompatActivity {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                Log.d(ACTIVITY_NAME, "searchbar is not null");
-                                Log.d(ACTIVITY_NAME, imageResource);
+                                Log.d(TAG, "searchbar is not null");
+                                Log.d(TAG, imageResource);
                                 imageResource = dogDetails.getSearchedBreedDetails(searchValue);
                                 resourceId = getResources().getIdentifier(imageResource, "drawable", "com.visal.mobilecoursework1");
                                 breedImageView.setImageResource(resourceId);
@@ -109,12 +102,12 @@ public class SearchBreedActivity extends AppCompatActivity {
                         }, DELAY);
                     } else {
                         //TODO: add alert
-                        Log.d(ACTIVITY_NAME, "value was not found");
+                        Log.d(TAG, "value was not found");
                     }
 
                 } else {
                     //TODO: add alert
-                    Log.d(ACTIVITY_NAME, "Searchbar is null");
+                    Log.d(TAG, "Searchbar is null");
                 }
             }
         });

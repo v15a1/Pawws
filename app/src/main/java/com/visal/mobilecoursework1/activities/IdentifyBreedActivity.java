@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,16 +27,20 @@ import com.visal.mobilecoursework1.utils.DogDetails;
 
 public class IdentifyBreedActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private static final String ACTIVITY_NAME = "IdentifyBreedActivity";
+    private static final String TAG = "IdentifyBreedActivity";
     private static final String ACTIVITY_TITLE_NAME = "Identify Breeds";
 
     DogDetails dogDetails = new DogDetails();
 
     private Spinner identifyBreedSpinner;
     private Button submitBreedButton;
+    private CountDownTimer countDownTimer;
+    private TextView countDown;
+    private ProgressBar timerProgress;
     String selectedSpinnerItem;
     Dog  dogObject;
     int resourceId;
+    boolean isTimerToggled;
 
 
 
@@ -42,17 +48,45 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identify_breed);
-//        Log.d(ACTIVITY_NAME, Integer.toString(resourceIndex));
+
+        //getting the intent
+        Intent intent = getIntent();
+        isTimerToggled = intent.getBooleanExtra("timerToggle", false);
 
         //initializing and accessing values after application is created
         submitBreedButton = (Button) findViewById(R.id.submit_breed_button);
         ImageView dogImageView = (ImageView) findViewById(R.id.breed_image_view);
+        timerProgress = (ProgressBar) findViewById(R.id.identify_breed_progress_bar);
+        countDown = (TextView) findViewById(R.id.identify_breed_timer);
 
         //Assigning the dogs
         dogObject = dogDetails.getRandomDog(); //randomizing the displayed image
-        Log.d(ACTIVITY_NAME, dogObject.toString());
+        Log.d(TAG, dogObject.toString());
         resourceId = getResources().getIdentifier(dogObject.getResourceName(), "drawable", "com.visal.mobilecoursework1");
         dogImageView.setImageResource(resourceId);
+
+        //Setting items into the spinner
+        //https://www.tutorialspoint.com/how-to-get-spinner-value-in-android
+        identifyBreedSpinner = (Spinner) findViewById(R.id.identify_breed_spinner);
+        identifyBreedSpinner.setEnabled(true);        //allowing user to interact with the spinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.dog_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        identifyBreedSpinner.setAdapter(adapter);
+        identifyBreedSpinner.setOnItemSelectedListener(this);
+
+        //changing visibility of the elements
+        timerProgress.setVisibility(View.GONE);
+        countDown.setVisibility(View.GONE);
+
+        //changing the name of the actionbar
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar!= null){
+            Log.i(TAG, "ActionBar != null");
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(ACTIVITY_TITLE_NAME);
+        }
+
+        Log.i(TAG, identifyBreedSpinner.getSelectedItem().toString());
 
         submitBreedButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,26 +99,29 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
             }
         });
 
+        countDownTimer = new CountDownTimer(10000, 1000) {
 
-        //Setting items into the spinner
-        //https://www.tutorialspoint.com/how-to-get-spinner-value-in-android
-        identifyBreedSpinner = (Spinner) findViewById(R.id.identify_breed_spinner);
-        identifyBreedSpinner.setEnabled(true);        //allowing user to interact with the spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.dog_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        identifyBreedSpinner.setAdapter(adapter);
-        identifyBreedSpinner.setOnItemSelectedListener(this);
+            //initial timer value
+            int timer = 10;
 
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timer--;
+                timerProgress.setProgress(timer);
+                countDown.setText(Integer.toString(timer));
+            }
 
-        //changing the name of the actionbar
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar!= null){
-            Log.i(ACTIVITY_NAME, "ActionBar != null");
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(ACTIVITY_TITLE_NAME);
+            @Override
+            public void onFinish() {
+
+            }
+        };
+
+        if (isTimerToggled){
+            timerProgress.setVisibility(View.VISIBLE);
+            countDown.setVisibility(View.VISIBLE);
+            countDownTimer.start();
         }
-
-        Log.i(ACTIVITY_NAME, identifyBreedSpinner.getSelectedItem().toString());
     }
 
     //https://stackoverflow.com/questions/35810229/how-to-display-and-set-click-event-on-back-arrow-on-toolbar

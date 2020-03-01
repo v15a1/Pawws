@@ -7,6 +7,26 @@
     tools:context=".activities.IdentifyBreedActivity"
     android:background="@drawable/select_breed_background">
 
+    <TextView
+        android:id="@+id/identify_breed_timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/identify_breed_progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/identify_dog_timer"
+        android:max="10"
+        />
+
     <ImageView
         android:id="@+id/breed_image_view"
         android:layout_width="0dp"
