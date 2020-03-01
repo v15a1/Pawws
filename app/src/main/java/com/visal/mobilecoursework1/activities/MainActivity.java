@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.visal.mobilecoursework1.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,7 +20,9 @@ public class MainActivity extends AppCompatActivity {
     Button identifyDogButton;
     Button identifyBreedButton;
     Button searchBreedButton;
-    BottomNavigationView bottomNavigationMenu;
+    SwitchMaterial switchMaterial;
+
+    boolean isTimerToggled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +32,20 @@ public class MainActivity extends AppCompatActivity {
         identifyDogButton = (Button) findViewById(R.id.identify_dog_button);
         identifyBreedButton = (Button) findViewById(R.id.identify_breed_button);
         searchBreedButton = (Button) findViewById(R.id.search_breed_button);
+        switchMaterial = (SwitchMaterial) findViewById(R.id.timer_toggle);
 
-
+        switchMaterial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    isTimerToggled = true;
+                    Log.d(ACTIVITY_NAME, "onCheckedChanged: true");
+                }else{
+                    isTimerToggled = false;
+                    Log.d(ACTIVITY_NAME, "onCheckedChanged: false");
+                }
+            }
+        });
         //setting onClick listener to navigate to Identify dog_watermark page
         identifyDogButton.setOnClickListener(new View.OnClickListener() {
             @Override

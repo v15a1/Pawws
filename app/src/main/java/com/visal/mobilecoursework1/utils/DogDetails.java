@@ -1,7 +1,10 @@
 package com.visal.mobilecoursework1.utils;
 
+import android.renderscript.Sampler;
 import android.util.Log;
 
+import java.lang.reflect.Array;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Dictionary;
@@ -12,28 +15,30 @@ import java.util.Random;
 
 public class DogDetails {
 
+    private static final String CLASS_NAME = DogDetails.class.getSimpleName();
+
     private Map<String, String> dogDetails = new Hashtable<String, String>();
     private String[] dogBreeds;
-    Integer[] dogImageCount;
+    private Integer[] dogImageCount;
 
     public DogDetails() {
         dogBreeds = new String[]{
-          "n02108915",
-          "n02105855",
-          "n02112018",
-          "n02111889",
-          "n02110185",
-          "n02110063",
-          "n02108551",
-          "n02108422",
-          "n02107142",
-          "n02106662",
+                "n02108915",
+                "n02105855",
+                "n02112018",
+                "n02111889",
+                "n02110185",
+                "n02110063",
+                "n02108551",
+                "n02108422",
+                "n02107142",
+                "n02106662",
         };
-        dogImageCount = new Integer[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+        dogImageCount = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
         addDogDetails();
     }
 
-    private void addDogDetails(){
+    private void addDogDetails() {
         dogDetails.put("n02108915", "French Bulldog");
         dogDetails.put("n02105855", "Shetland Sheepdog");
         dogDetails.put("n02112018", "Pomeranian");
@@ -46,13 +51,29 @@ public class DogDetails {
         dogDetails.put("n02106662", "German Shepard");
     }
 
-    public Dog getRandomDog(){
+    public Dog getRandomDog() {
         Random random = new Random();
 
         int randBreed = random.nextInt(dogBreeds.length);
-        int randDogNumIndex = random.nextInt(dogImageCount.length);
+        int randDogNumIndex = random.nextInt(dogImageCount.length - 1) + 1;
 
         String resource = dogBreeds[randBreed] + "_" + dogImageCount[randDogNumIndex];
         return new Dog(dogDetails.get(dogBreeds[randBreed]), resource);
+    }
+
+    public String getSearchedBreedDetails(String searchValue) {
+        if (dogDetails.containsValue(searchValue)) {
+            Log.d(CLASS_NAME, "contains" + searchValue);
+            for (Map.Entry entry : dogDetails.entrySet()) {
+                Log.d(CLASS_NAME, entry.toString());
+                if (entry.getValue().equals(searchValue)) {
+                    String breedKey = entry.getKey().toString();
+                    String resource = breedKey + "_" + (new Random().nextInt(dogBreeds.length - 1) + 1);
+                    Log.d(CLASS_NAME, resource);
+                    return resource;
+                }
+            }
+        }
+        return null;
     }
 }

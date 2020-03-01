@@ -10,7 +10,8 @@
     <string name="navigation_identify_breed">Identify Breeds</string>
     <string name="navigation_search_breed">Search Breed</string>
     <string name="dog_of_a_certain_breed">Dog of a certain breed</string>
-    <string name="submit">Next</string>
+    <string name="submit">Submit</string>
+    <string name="next">Next</string>
     <string name="select_breed_spinner_label">Select a Dog Breed</string>
     <string name="select_alert_message">Select a Breed</string>
     <string name="correct_answer_message">CORRECT!</string>
@@ -19,6 +20,7 @@
     <string name="enter_the_breed_hint">Enter the breed</string>
     <string name="stop">Stop</string>
     <string name="submit_button_title">Submit</string>
+    <string name="timer">Timer</string>
 
     <string-array name="dog_array">
         <item>Select a Breed</item>

@@ -33,7 +33,7 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
     private Spinner identifyBreedSpinner;
     private Button submitBreedButton;
     String selectedSpinnerItem;
-    Dog dogObject;
+    Dog  dogObject;
     int resourceId;
 
 

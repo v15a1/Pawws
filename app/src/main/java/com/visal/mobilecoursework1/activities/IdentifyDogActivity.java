@@ -38,17 +38,21 @@ public class IdentifyDogActivity extends AppCompatActivity{
     DogDetails dogDetails = new DogDetails();
 
     private Button identifyDogButton;
+
     int resourceImage1;
     int resourceImage2;
     int resourceImage3;
+
     ImageView imageView1;
     ImageView imageView2;
     ImageView imageView3;
+
     List<String> uniqueDogBreedNames = new ArrayList<String>();
     List<Dog> uniqueDogs = new ArrayList<Dog>();
+
     String answer;
     int randomBreedIndex;
-
+    Drawable correctAnswerHighlight;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -141,7 +145,7 @@ public class IdentifyDogActivity extends AppCompatActivity{
 
     public void checkAnswer(String selectedImage){
         String correctAnswerMessage = "The selected answer is correct. Well done!!!";
-        String wrongAnswerMessage = "Your answer is incorrect. the correct answer is " + (randomBreedIndex + 1) + " image. Better luck next time";
+        String wrongAnswerMessage = "Your answer is incorrect. the correct answer is image number " + (randomBreedIndex + 1) + ". Better luck next time";
         TextView correctAlertTitle = new TextView(this);
         TextView wrongAlertTitle = new TextView(this);
 
@@ -160,7 +164,6 @@ public class IdentifyDogActivity extends AppCompatActivity{
         if (selectedImage.equals(answer)){
             AlertDialogComponent.identifyDogAlert(this, correctAlertTitle, correctAnswerMessage, false);
         }else{
-            Drawable correctAnswerHighlight = getResources().getDrawable(R.drawable.correct_answer_highlight);
             AlertDialogComponent.identifyDogAlert(this, wrongAlertTitle, wrongAnswerMessage, false);
             imageView1.setBackground(correctAnswerHighlight);
             Log.d(ACTIVITY_NAME, "Highlight set");

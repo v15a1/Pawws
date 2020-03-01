@@ -4,36 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SearchBreedActivity">
+    tools:context=".activities.SearchBreedActivity"
+    android:background="@drawable/search_page_background">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+
+    <EditText
+        android:id="@+id/search_breed"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="@dimen/button_height"
+        android:layout_weight="1"
+        android:hint="@string/enter_the_breed_hint"
+        android:importantForAutofill="no"
+        android:inputType="textAutoComplete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:drawableStart="@drawable/search_icon"/>
 
-        <EditText
-            android:id="@+id/search_breed"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="@string/enter_the_breed_hint"
-            android:importantForAutofill="no"
-            android:inputType="textAutoComplete" />
-
-        <Button
-            android:id="@+id/search_button"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:layout_weight="2"
-            android:drawableStart="@drawable/search_icon"
-            android:hint="@string/enter_the_breed_hint"
-            android:text="@string/search_button_text" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -42,7 +29,8 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/white">
 
         <Button
             android:id="@+id/submit_search_button"
@@ -51,17 +39,18 @@
             android:layout_height="@dimen/button_height"
             android:layout_weight="1"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:text="@string/submit" />
+            android:text="@string/submit"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/stop_search_button"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
             android:layout_weight="1"
             android:backgroundTint="@color/red"
             android:text="@string/stop"
-            android:textColor="@color/white"
-            style="@style/Widget.AppCompat.Button.Colored"/>
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <ImageView
@@ -71,6 +60,6 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/search_breed"
         tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
