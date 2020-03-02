@@ -1,5 +1,6 @@
 package com.visal.mobilecoursework1.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -72,6 +73,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SearchBreedActivity.class));
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("timerToggle",isTimerToggled);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        isTimerToggled = savedInstanceState.getBoolean("timerToggle");
+        Log.d(TAG, "onRestoreInstanceState: isTimerLogged : " + isTimerToggled);
     }
 }
 

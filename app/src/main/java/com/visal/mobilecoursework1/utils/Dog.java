@@ -1,6 +1,8 @@
 package com.visal.mobilecoursework1.utils;
 
-public class Dog {
+import java.io.Serializable;
+
+public class Dog implements Serializable {
     private String breed;
     private String resourceName;
 

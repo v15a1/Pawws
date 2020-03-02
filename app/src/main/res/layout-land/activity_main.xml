@@ -4,34 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.MainActivity"
+    android:background="@drawable/dog_watermark_landscape">
 
-
-    <Button
-        android:id="@+id/identify_breed_button"
-        android:layout_width="300sp"
-        android:layout_height="wrap_content"
-        android:text="Identifiy the Breed"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/top_welcome_message"
+        android:layout_width="195dp"
+        android:layout_height="38dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/welcome_to"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/identify_dog_button"
-        android:layout_width="300sp"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Identify the dog"
-        app:layout_constraintBottom_toTopOf="@+id/identify_breed_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/app_title"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="80sp"
+        app:layout_constraintStart_toStartOf="@+id/top_welcome_message"
+        app:layout_constraintTop_toTopOf="@+id/top_welcome_message" />
 
-    <Button
-        android:id="@+id/search_breed_button"
-        android:layout_width="300sp"
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search dog breed"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/identify_breed_button" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <LinearLayout
+            android:id="@+id/switch_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/layout_spacer"
+            android:layout_weight="4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/timer"
+                android:textColor="@color/colorPrimary" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/timer_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/spacer_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/identify_breed_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:text="@string/identify_the_breed" />
+
+        <Button
+            android:id="@+id/identify_dog_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:text="@string/identify_the_dog" />
+
+        <Button
+            android:id="@+id/search_breed_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:text="@string/search_dog_breed" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

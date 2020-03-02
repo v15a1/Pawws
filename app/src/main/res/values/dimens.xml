@@ -6,4 +6,5 @@
     <dimen name="spinner_label_margin">9dp</dimen>
     <dimen name="image_view_padding">5dp</dimen>
     <dimen name="image_view_margin">20dp</dimen>
+    <dimen name="layout_margin_5dp">5dp</dimen>
 </resources>

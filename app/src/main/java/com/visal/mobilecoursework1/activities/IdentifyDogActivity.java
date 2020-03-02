@@ -104,7 +104,6 @@ public class IdentifyDogActivity extends AppCompatActivity {
 
         //setting intial values for the countdown timer
         countDown.setText("10");
-        timerProgress.setProgress(10);
 
         countDownTimer = new CountDownTimer(10000, 1000) {
             //initial timer value
@@ -112,9 +111,9 @@ public class IdentifyDogActivity extends AppCompatActivity {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                time--;
-                timerProgress.setProgress(time);
                 countDown.setText(Integer.toString(time));
+                timerProgress.setProgress(time);
+                time--;
             }
 
             @Override
@@ -123,7 +122,7 @@ public class IdentifyDogActivity extends AppCompatActivity {
             }
         };
 
-        //starting the timer if the toggle is true
+        //displaying and starting the timer if the toggle is true
         if (isTimerToggled) {
             countDown.setVisibility(View.VISIBLE);
             timerProgress.setVisibility(View.VISIBLE);
