@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">MobileCourseWork1</string>
-    <string name="identify_the_breed">Identify the Breed</string>
-    <string name="identify_the_dog">Identify the dog</string>
-    <string name="search_dog_breed">Search dog breed</string>
+    <string name="identify_the_breed">IDENTIFY THE BREED</string>
+    <string name="identify_the_dog">IDENTIFY THE DOG</string>
+    <string name="search_dog_breed">SEARCH DOG BREED</string>
     <string name="welcome_to">WELCOME TO</string>
     <string name="app_title">p<b>aww</b>s</string>
     <string name="navigation_home">Home</string>
@@ -12,7 +12,7 @@
     <string name="dog_of_a_certain_breed">Dog of a certain breed</string>
     <string name="submit">Submit</string>
     <string name="next">Next</string>
-    <string name="select_breed_spinner_label">Select a Dog Breed</string>
+    <string name="select_breed_spinner_label">What is the Breed?</string>
     <string name="select_alert_message">Select a Breed</string>
     <string name="correct_answer_message">CORRECT!</string>
     <string name="incorrect_answer_message">WRONG!</string>

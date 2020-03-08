@@ -48,10 +48,12 @@
 
         <Button
             android:id="@+id/identify_breed_button"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
-            android:text="@string/identify_the_breed" />
+            android:text="@string/identify_the_breed"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/identify_dog_button"
@@ -59,15 +61,17 @@
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
             android:text="@string/identify_the_dog"
-            android:textSize="15sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/search_breed_button"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
-            android:text="@string/search_dog_breed" />
+            android:text="@string/search_dog_breed"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
     </LinearLayout>
 

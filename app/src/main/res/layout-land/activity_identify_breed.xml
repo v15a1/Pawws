@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.IdentifyBreedActivity">
+    tools:context=".activities.IdentifyBreedActivity"
+    android:background="@drawable/identify_breed_background_landscape">
 
     <TextView
         android:id="@+id/identify_breed_timer"

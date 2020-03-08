@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,11 +18,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    SQLiteDatabase scoreDatabase;
     Button identifyDogButton;
     Button identifyBreedButton;
     Button searchBreedButton;
     SwitchMaterial switchMaterial;
-
     boolean isTimerToggled = false;
 
     @Override
@@ -34,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
         identifyBreedButton = (Button) findViewById(R.id.identify_breed_button);
         searchBreedButton = (Button) findViewById(R.id.search_breed_button);
         switchMaterial = (SwitchMaterial) findViewById(R.id.timer_toggle);
+
+        if (savedInstanceState != null){
+            switchMaterial.setActivated(savedInstanceState.getBoolean("timerToggle"));
+        }
 
         //method to toggle the timer switch
         switchMaterial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

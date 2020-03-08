@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity"
-    android:background="@drawable/dog_watermark_landscape">
+    android:background="@drawable/dog_watermark_landscape"
+    tools:context=".activities.MainActivity">
 
     <TextView
         android:id="@+id/top_welcome_message"
@@ -71,24 +71,30 @@
 
         <Button
             android:id="@+id/identify_breed_button"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
-            android:text="@string/identify_the_breed" />
+            android:text="@string/identify_the_breed"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/identify_dog_button"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
-            android:text="@string/identify_the_dog" />
+            android:text="@string/identify_the_dog"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/search_breed_button"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
-            android:text="@string/search_dog_breed" />
+            android:text="@string/search_dog_breed"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

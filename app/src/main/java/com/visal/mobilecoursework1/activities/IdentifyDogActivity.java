@@ -5,6 +5,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -12,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +38,9 @@ public class IdentifyDogActivity extends AppCompatActivity {
 
     private static final String TAG = IdentifyDogActivity.class.getSimpleName();
     private static final String ACTIVITY_TITLE_NAME = "Identify Dogs";
+
+    private Context context = this;
+    private static final long INTERVAL = 1000;
     DogDetails dogDetails = new DogDetails();
     private Button identifyDogButton;
     private int resourceImage1;
@@ -52,7 +58,9 @@ public class IdentifyDogActivity extends AppCompatActivity {
     private ProgressBar timerProgress;
     private TextView countDown;
     private CountDownTimer countDownTimer;
-
+    long millisRemaining;
+    boolean didCountDownStart;
+    boolean isAnswerSubmitted;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -77,14 +85,27 @@ public class IdentifyDogActivity extends AppCompatActivity {
         isTimerToggled = intent.getBooleanExtra("timerToggle", false);
 //        Log.d(TAG, "onCreate: " + isTimerToggled);
 
-        //generating unique dogs and breed images
-        while (uniqueDogBreedNames.size() < 3) {
-            Dog dog = dogDetails.getRandomDog();
-            if (!uniqueDogBreedNames.contains(dog.getBreed())) {
-                uniqueDogBreedNames.add(dog.getBreed());
-                uniqueDogs.add(dog);
+        if (savedInstanceState != null) {
+            uniqueDogBreedNames = savedInstanceState.getStringArrayList("uniqueDogBreedNames");
+            uniqueDogs = (List<Dog>) savedInstanceState.getSerializable("uniqueDogs");
+            answer = savedInstanceState.getString("answer");
+            randomBreedIndex = savedInstanceState.getInt("randomBreedIndex");
+            millisRemaining = savedInstanceState.getLong("millisRemaining");
+            didCountDownStart = savedInstanceState.getBoolean("didCountDownStart");
+            isAnswerSubmitted = savedInstanceState.getBoolean("isAnswerSubmitted");
+        } else {
+            millisRemaining = 11000;
+            //generating unique dogs and breed images
+            while (uniqueDogBreedNames.size() < 3) {
+                Dog dog = dogDetails.getRandomDog();
+                if (!uniqueDogBreedNames.contains(dog.getBreed())) {
+                    uniqueDogBreedNames.add(dog.getBreed());
+                    uniqueDogs.add(dog);
+                }
             }
         }
+
+
         Log.d(TAG, Arrays.toString(uniqueDogBreedNames.toArray()));
 
         //assigning a dog as the correct answer
@@ -100,33 +121,13 @@ public class IdentifyDogActivity extends AppCompatActivity {
         imageView3.setImageResource(resourceImage3);
 
         breedTextView.setText(answer);
-//        identifyDogButton.setEnabled(false);
 
-        //setting intial values for the countdown timer
-        countDown.setText("10");
-
-        countDownTimer = new CountDownTimer(10000, 1000) {
-            //initial timer value
-            int time = 10;
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                countDown.setText(Integer.toString(time));
-                timerProgress.setProgress(time);
-                time--;
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        };
 
         //displaying and starting the timer if the toggle is true
         if (isTimerToggled) {
             countDown.setVisibility(View.VISIBLE);
             timerProgress.setVisibility(View.VISIBLE);
-            countDownTimer.start();
+            startCountDownTimer(millisRemaining, INTERVAL);
         }
 
         //setting onclick Listeners
@@ -134,6 +135,7 @@ public class IdentifyDogActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkAnswer(uniqueDogBreedNames.get(0));
+                stopCountDownTimer();
             }
         });
 
@@ -141,6 +143,7 @@ public class IdentifyDogActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkAnswer(uniqueDogBreedNames.get(1));
+                stopCountDownTimer();
             }
         });
 
@@ -148,6 +151,7 @@ public class IdentifyDogActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkAnswer(uniqueDogBreedNames.get(2));
+                stopCountDownTimer();
             }
         });
 
@@ -215,4 +219,62 @@ public class IdentifyDogActivity extends AppCompatActivity {
         identifyDogButton.setEnabled(true);
     }
 
+    //saving state
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArrayList("uniqueDogBreedNames", (ArrayList<String>) uniqueDogBreedNames);
+        outState.putSerializable("uniqueDogs", (ArrayList<Dog>) uniqueDogs);
+        outState.putString("answer", answer);
+        outState.putInt("randomBreedIndex", randomBreedIndex);
+        outState.putLong("millisRemaining", millisRemaining);
+        outState.putBoolean("isAnswerSubmitted", isAnswerSubmitted);
+        outState.putBoolean("didCountDownStart", didCountDownStart);
+    }
+
+    //method to start countdown timer
+    private void startCountDownTimer(long duration, long interval) {
+        countDownTimer = new CountDownTimer(duration, interval) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int seconds = (int) (millisUntilFinished / 1000);
+                Log.d(TAG, "onTick: " + seconds);
+                timerProgress.setProgress(seconds);
+                countDown.setText(Integer.toString(seconds));
+                millisRemaining = millisUntilFinished;
+            }
+
+            @Override
+            public void onFinish() {
+                countDown.setText("0");
+                if (!isAnswerSubmitted && !((Activity) context).isFinishing()) {
+                    Log.d(TAG, "onFinish: Timer finished");
+                    String answer = "You ran out of time. The correct answer is image number" + (randomBreedIndex + 1);
+                    AlertDialogComponent.basicAlert(IdentifyDogActivity.this, answer, "You ran out of time.");
+                    identifyDogButton.setEnabled(true);
+                    identifyDogButton.setText(R.string.next);
+                }
+            }
+        };
+
+        didCountDownStart = true;
+        //starting the countdown
+        countDownTimer.start();
+    }
+
+    //method to cancel the countdown timer
+    private void stopCountDownTimer() {
+        if (isTimerToggled) {
+            countDownTimer.cancel();
+            didCountDownStart = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopCountDownTimer();
+    }
 }
+
+

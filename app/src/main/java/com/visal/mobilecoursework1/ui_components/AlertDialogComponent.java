@@ -67,10 +67,10 @@ public class AlertDialogComponent {
         alertDialog.show();
     }
 
-    public static void timeoutAlert(Context context, String message) {
+    public static void basicAlert(Context context, String message, String title) {
         androidx.appcompat.app.AlertDialog.Builder alertDialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(context);
         TextView timeoutTitle = new TextView(context);
-        timeoutTitle.setText("Out of Time");
+        timeoutTitle.setText(title);
         timeoutTitle.setPadding(30, 30, 20, 30);
         timeoutTitle.setTextSize(20F);
         timeoutTitle.setTypeface(null, Typeface.BOLD);
