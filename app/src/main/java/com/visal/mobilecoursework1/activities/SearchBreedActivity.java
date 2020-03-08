@@ -68,6 +68,19 @@ public class SearchBreedActivity extends AppCompatActivity {
                 breedImageView.setImageResource(resourceId);
                 handler.postDelayed(getSlideShow(), DELAY);
             }
+            if (!isSubmitButtonVisible){
+                submitSearchButton.setEnabled(false);
+                submitSearchButton.setAlpha(0.3f);
+
+                stopSearchButton.setEnabled(true);
+                stopSearchButton.setAlpha(1f);
+            }else{
+                submitSearchButton.setEnabled(true);
+                submitSearchButton.setAlpha(1f);
+
+                stopSearchButton.setEnabled(false);
+                stopSearchButton.setAlpha(0.3f);
+            }
 
         }
 
@@ -81,10 +94,9 @@ public class SearchBreedActivity extends AppCompatActivity {
         submitSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isStopButtonVisible = true;
-                isSubmitButtonVisible = false;
-                isSearchEnabled = false;
                 searchValue = searchBar.getText().toString();
+                isSubmitButtonVisible = false;
+                isStopButtonVisible = true;
 
                 //validating if search-bar is empty
                 if (!searchValue.equals("")) {
@@ -123,18 +135,17 @@ public class SearchBreedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isSubmitButtonVisible = true;
-                isSearchEnabled = false;
-                if (!isStopButtonVisible){
-                    loop = false;
-                   //making the stop search button enabled and a graphical hint to show that the button is clickable
-                   submitSearchButton.setAlpha(1f);
-                   submitSearchButton.setEnabled(true);
+                isStopButtonVisible = false;
 
-                   stopSearchButton.setAlpha(0.3f);
-                   stopSearchButton.setEnabled(false);
+                loop = false;
+                //making the stop search button enabled and a graphical hint to show that the button is clickable
+                submitSearchButton.setAlpha(1f);
+                submitSearchButton.setEnabled(true);
 
-                   searchBar.setEnabled(true);
-               }
+                stopSearchButton.setAlpha(0.3f);
+                stopSearchButton.setEnabled(false);
+
+                searchBar.setEnabled(true);
             }
         });
     }

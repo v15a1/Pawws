@@ -39,7 +39,7 @@ public class IdentifyDogActivity extends AppCompatActivity {
     private static final String TAG = IdentifyDogActivity.class.getSimpleName();
     private static final String ACTIVITY_TITLE_NAME = "Identify Dogs";
 
-    private Context context = this;
+    Context context = this;
     private static final long INTERVAL = 1000;
     DogDetails dogDetails = new DogDetails();
     private Button identifyDogButton;
@@ -88,8 +88,8 @@ public class IdentifyDogActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             uniqueDogBreedNames = savedInstanceState.getStringArrayList("uniqueDogBreedNames");
             uniqueDogs = (List<Dog>) savedInstanceState.getSerializable("uniqueDogs");
-            answer = savedInstanceState.getString("answer");
             randomBreedIndex = savedInstanceState.getInt("randomBreedIndex");
+            answer = uniqueDogBreedNames.get(randomBreedIndex);
             millisRemaining = savedInstanceState.getLong("millisRemaining");
             didCountDownStart = savedInstanceState.getBoolean("didCountDownStart");
             isAnswerSubmitted = savedInstanceState.getBoolean("isAnswerSubmitted");
@@ -103,13 +103,13 @@ public class IdentifyDogActivity extends AppCompatActivity {
                     uniqueDogs.add(dog);
                 }
             }
+            randomBreedIndex = new Random().nextInt(3);
         }
 
 
         Log.d(TAG, Arrays.toString(uniqueDogBreedNames.toArray()));
 
         //assigning a dog as the correct answer
-        randomBreedIndex = new Random().nextInt(3);
         answer = uniqueDogBreedNames.get(randomBreedIndex);
 
         resourceImage1 = getResources().getIdentifier(uniqueDogs.get(0).getResourceName(), "drawable", "com.visal.mobilecoursework1");
@@ -120,7 +120,8 @@ public class IdentifyDogActivity extends AppCompatActivity {
         imageView2.setImageResource(resourceImage2);
         imageView3.setImageResource(resourceImage3);
 
-        breedTextView.setText(answer);
+        String answerMessage = "Search for the " + answer;
+        breedTextView.setText(answerMessage);
 
 
         //displaying and starting the timer if the toggle is true
@@ -155,17 +156,17 @@ public class IdentifyDogActivity extends AppCompatActivity {
             }
         });
 
+
         identifyDogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(IdentifyDogActivity.this, IdentifyDogActivity.class));
+                startActivity(new Intent(IdentifyDogActivity.this, IdentifyDogActivity.class).putExtra("timerToggle", isTimerToggled));
             }
         });
 
         //method to backtrack activities
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            Log.i(TAG, "ActionBar != null");
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(ACTIVITY_TITLE_NAME);
         }
@@ -178,6 +179,7 @@ public class IdentifyDogActivity extends AppCompatActivity {
         //if the id menu previous item is the home screen. Then the activity changes to the previous activity
         if (item.getItemId() == android.R.id.home) {
             //method to change activities
+//            AlertDialogComponent.homeAlert(context, "Allah", "is dog");
             startActivity(new Intent(IdentifyDogActivity.this, MainActivity.class));
             finish();       //method call to destroy the activity from the memory
             return true;
@@ -190,7 +192,7 @@ public class IdentifyDogActivity extends AppCompatActivity {
         String wrongAnswerMessage = "Your answer is incorrect. the correct answer is image number " + (randomBreedIndex + 1) + ". Better luck next time";
         TextView correctAlertTitle = new TextView(this);
         TextView wrongAlertTitle = new TextView(this);
-
+        //setting customized titles to alerts
         correctAlertTitle.setTextColor(Color.parseColor("#1BE59D"));
         correctAlertTitle.setText("CORRECT!");
         correctAlertTitle.setPadding(40, 30, 20, 30);
@@ -208,7 +210,6 @@ public class IdentifyDogActivity extends AppCompatActivity {
         } else {
             AlertDialogComponent.identifyDogAlert(this, wrongAlertTitle, wrongAnswerMessage, false);
             imageView1.setBackground(correctAnswerHighlight);
-            Log.d(TAG, "Highlight set");
         }
 
         //disabling the imageviews to prevent further interaction
@@ -238,7 +239,6 @@ public class IdentifyDogActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 int seconds = (int) (millisUntilFinished / 1000);
-                Log.d(TAG, "onTick: " + seconds);
                 timerProgress.setProgress(seconds);
                 countDown.setText(Integer.toString(seconds));
                 millisRemaining = millisUntilFinished;
@@ -249,10 +249,14 @@ public class IdentifyDogActivity extends AppCompatActivity {
                 countDown.setText("0");
                 if (!isAnswerSubmitted && !((Activity) context).isFinishing()) {
                     Log.d(TAG, "onFinish: Timer finished");
-                    String answer = "You ran out of time. The correct answer is image number" + (randomBreedIndex + 1);
+                    String answer = "You ran out of time. The correct answer is image number " + (randomBreedIndex + 1);
                     AlertDialogComponent.basicAlert(IdentifyDogActivity.this, answer, "You ran out of time.");
                     identifyDogButton.setEnabled(true);
                     identifyDogButton.setText(R.string.next);
+                    //disabling the imageviews to clicks
+                    imageView1.setEnabled(false);
+                    imageView2.setEnabled(false);
+                    imageView3.setEnabled(false);
                 }
             }
         };
