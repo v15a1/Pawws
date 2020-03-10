@@ -1,4 +1,4 @@
-package com.visal.mobilecoursework1.activities;
+package com.visal.pawws.controllers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -14,9 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.visal.mobilecoursework1.R;
-import com.visal.mobilecoursework1.ui_components.AlertDialogComponent;
-import com.visal.mobilecoursework1.utils.DogDetails;
+import com.visal.pawws.R;
+import com.visal.pawws.models.DogDetails;
 
 public class SearchBreedActivity extends AppCompatActivity {
 

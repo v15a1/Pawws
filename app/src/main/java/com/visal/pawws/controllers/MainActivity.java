@@ -1,4 +1,4 @@
-package com.visal.mobilecoursework1.activities;
+package com.visal.pawws.controllers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,13 +12,12 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
-import com.visal.mobilecoursework1.R;
+import com.visal.pawws.R;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    SQLiteDatabase scoreDatabase;
     Button identifyDogButton;
     Button identifyBreedButton;
     Button searchBreedButton;
@@ -78,19 +77,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SearchBreedActivity.class));
             }
         });
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean("timerToggle",isTimerToggled);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        isTimerToggled = savedInstanceState.getBoolean("timerToggle");
-        Log.d(TAG, "onRestoreInstanceState: isTimerLogged : " + isTimerToggled);
     }
 }
 

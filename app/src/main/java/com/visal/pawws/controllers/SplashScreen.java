@@ -1,4 +1,4 @@
-package com.visal.mobilecoursework1.activities;
+package com.visal.pawws.controllers;
 
 import android.content.Intent;
 import android.os.Bundle;

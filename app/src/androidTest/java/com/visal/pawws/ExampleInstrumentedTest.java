@@ -1,4 +1,4 @@
-package com.visal.mobilecoursework1;
+package com.visal.pawws;
 
 import android.content.Context;
 

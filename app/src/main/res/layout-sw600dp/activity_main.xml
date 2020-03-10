@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dog_watermark"
+    android:background="@drawable/tab_vertical_home_background"
     tools:context=".controllers.MainActivity">
 
     <LinearLayout
@@ -48,10 +48,12 @@
 
         <Button
             android:id="@+id/identify_breed_button"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
-            android:text="@string/identify_the_breed" />
+            android:text="@string/identify_the_breed"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/identify_dog_button"
@@ -59,43 +61,46 @@
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
             android:text="@string/identify_the_dog"
-            android:textSize="15sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/search_breed_button"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
-            android:text="@string/search_dog_breed" />
+            android:text="@string/search_dog_breed"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/top_welcome_message"
-        android:layout_width="195dp"
-        android:layout_height="38dp"
-        android:fontFamily="@"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
         android:text="@string/welcome_to"
         android:textColor="@color/colorPrimary"
-        android:textSize="30sp"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="349dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/lily_script"
         android:text="@string/app_title"
-        android:gravity="center"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="100sp"
+        android:textSize="150sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/lily_script"
+        android:gravity="center"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

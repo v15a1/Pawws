@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.visal.mobilecoursework1">
+    package="com.visal.pawws">
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -11,16 +11,16 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".activities.SearchBreedActivity"
+            android:name="com.visal.pawws.controllers.SearchBreedActivity"
             android:theme="@style/PageTheme" />
         <activity
-            android:name=".activities.IdentifyBreedActivity"
+            android:name="com.visal.pawws.controllers.IdentifyBreedActivity"
             android:theme="@style/PageTheme" />
         <activity
-            android:name=".activities.IdentifyDogActivity"
+            android:name="com.visal.pawws.controllers.IdentifyDogActivity"
             android:theme="@style/PageTheme" />
         <activity
-            android:name=".activities.SplashScreen"
+            android:name="com.visal.pawws.controllers.SplashScreen"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.visal.pawws.controllers.MainActivity"
             android:theme="@style/AppTheme" />
     </application>
 

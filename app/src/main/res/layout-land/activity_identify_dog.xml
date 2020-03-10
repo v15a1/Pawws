@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.IdentifyDogActivity">
+    tools:context=".controllers.IdentifyDogActivity">
     <TextView
         android:id="@+id/identify_dog_timer"
         android:layout_width="match_parent"

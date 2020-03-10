@@ -1,15 +1,8 @@
-package com.visal.mobilecoursework1.utils;
+package com.visal.pawws.models;
 
-import android.renderscript.Sampler;
 import android.util.Log;
 
-import java.lang.reflect.Array;
-import java.security.Key;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 

@@ -1,11 +1,9 @@
-package com.visal.mobilecoursework1.activities;
+package com.visal.pawws.controllers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -25,37 +23,32 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.visal.mobilecoursework1.R;
-import com.visal.mobilecoursework1.ui_components.AlertDialogComponent;
-import com.visal.mobilecoursework1.utils.Dog;
-import com.visal.mobilecoursework1.utils.DogDetails;
-
-import java.io.Serializable;
+import com.visal.pawws.R;
+import com.visal.pawws.models.Dog;
+import com.visal.pawws.models.DogDetails;
 
 public class IdentifyBreedActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private Context context = this;
+    //constants
     private static final String TAG = "IdentifyBreedActivity";
     private static final String ACTIVITY_TITLE_NAME = "Identify Breeds";
     private static final int INTERVAL = 1000;
 
     DogDetails dogDetails = new DogDetails();
-
     private Spinner identifyBreedSpinner;
     private Button submitBreedButton;
     private TextView countDown;
     private ProgressBar timerProgress;
-    private TextView scoreText;
     String selectedSpinnerItem;
     Dog dogObject;
     int resourceId;
     boolean isTimerToggled;
     boolean isAnswerSubmitted;
-    int score;
     String resourceName;
     long millisRemaining;
     private CountDownTimer countDownTimer;
     boolean didCountDownStart;
+    ForegroundColorSpan fcsBlue;
 
 
     @Override
@@ -65,15 +58,15 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
         //getting the intent
         final Intent intent = getIntent();
         isTimerToggled = intent.getBooleanExtra("timerToggle", false);
-
+        fcsBlue = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
 
         //initializing and accessing values after application is created
         submitBreedButton = (Button) findViewById(R.id.submit_breed_button);
         ImageView dogImageView = (ImageView) findViewById(R.id.breed_image_view);
         timerProgress = (ProgressBar) findViewById(R.id.identify_breed_progress_bar);
         countDown = (TextView) findViewById(R.id.identify_breed_timer);
-        scoreText = (TextView) findViewById(R.id.score_text);
 
+        //retrieving and setting state
         if (savedInstanceState != null) {
             Log.d(TAG, "onCreate: saved instance != null");
             isTimerToggled = savedInstanceState.getBoolean("timerToggle");
@@ -84,7 +77,7 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
             dogObject = (Dog) savedInstanceState.getSerializable("dogObj");
             millisRemaining = savedInstanceState.getLong("millisRemaining");
             didCountDownStart = savedInstanceState.getBoolean("didCountDownStart");
-            score = savedInstanceState.getInt("score");
+            //to continue the countdown at orientation change
             if (didCountDownStart && isTimerToggled) {
                 startCountDownTimer(millisRemaining, INTERVAL);
             }
@@ -94,8 +87,6 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
             resourceName = dogObject.getResourceName();
             millisRemaining = 11000;
         }
-        String scoreMessage = "Your score is " + score;
-//        scoreText.setText(scoreMessage);
         //Assigning the dogs
         resourceId = getResources().getIdentifier(resourceName, "drawable", "com.visal.mobilecoursework1");
         dogImageView.setImageResource(resourceId);
@@ -112,7 +103,6 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
         //changing visibility or enabling of the elements
         timerProgress.setVisibility(View.GONE);
         countDown.setVisibility(View.GONE);
-//        submitBreedButton.setEnabled(false);
 
         //changing the name of the actionbar
         ActionBar actionBar = getSupportActionBar();
@@ -122,7 +112,7 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
             actionBar.setTitle(ACTIVITY_TITLE_NAME);
         }
 
-
+        //submit button functionality
         submitBreedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,11 +120,7 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
                     Intent intent1 = new Intent(IdentifyBreedActivity.this, IdentifyBreedActivity.class);
                     intent1.putExtra("timerToggle", isTimerToggled);
                     startActivity(intent1);
-                }
-//                else if(!isAnswerSubmitted){
-//                    ;
-//                }
-                else{
+                } else{
                     checkAnswer(dogObject, selectedSpinnerItem);
                     //checking if an answer is selected and submitted
                     isAnswerSubmitted = true;
@@ -164,7 +150,7 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
         return super.onOptionsItemSelected(item);
     }
 
-
+//getting the selected spinner item
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         //getting the selected value in
@@ -182,6 +168,7 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
 
     }
 
+    //method to check the submitted answer
     public void checkAnswer(Dog dog, String spinnerItemName) {
 
         //setting the alert message title to a custom textview
@@ -193,7 +180,6 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
         //using spannable string to change colours of a string
         SpannableString wrongAnswerSS = new SpannableString(wrongAnswerMessage);
         SpannableString correctAnswerSS = new SpannableString(correctAnswerMessage);
-        ForegroundColorSpan fcsBlue = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         int answerLength = dog.getBreed().length();
         wrongAnswerSS.setSpan(fcsBlue, 48, (49 + answerLength + 1), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -209,9 +195,8 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
         wrongAlertTitle.setTextSize(20F);
         wrongAlertTitle.setTypeface(null, Typeface.BOLD);
 
+        //checking if the answer is correct
         if (dog.getBreed().equals(spinnerItemName)) {
-            score++;
-            scoreText.setText(Integer.toString(score));
             AlertDialogComponent.identifyBreedAlert(this, submitBreedButton, correctAlertTitle, correctAnswerSS, false);
         } else {
             AlertDialogComponent.identifyBreedAlert(this, submitBreedButton, wrongAlertTitle, wrongAnswerSS, false);
@@ -236,8 +221,6 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
         outState.putSerializable("dogObj", dogObject);
         outState.putLong("millisRemaining", millisRemaining);
         outState.putBoolean("didCountDownStart", didCountDownStart);
-        outState.putInt("score", score);
-//        Log.d(TAG, "onSaveInstanceState: " + randVal);
     }
 
     //method to start countdown timer
@@ -255,10 +238,13 @@ public class IdentifyBreedActivity extends AppCompatActivity implements AdapterV
             @Override
             public void onFinish() {
                 countDown.setText("0");
-                if (!isAnswerSubmitted && !((Activity) context).isFinishing()) {
+                if (!isAnswerSubmitted && !IdentifyBreedActivity.this.isFinishing()) {
                     Log.d(TAG, "onFinish: Timer finished");
                     String answer = "You ran out of time. The correct answer is " + dogObject.getBreed();
-                    AlertDialogComponent.basicAlert(IdentifyBreedActivity.this, answer, "You ran out of time.");
+                    SpannableString answerSS = new SpannableString(answer);
+                    int answerLength = dogObject.getBreed().length();
+                    answerSS.setSpan(fcsBlue, 43, (43 + (answerLength)), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    AlertDialogComponent.basicAlert(IdentifyBreedActivity.this, answerSS, "You ran out of time.");
                     if (!isAnswerSubmitted){
                         submitBreedButton.setEnabled(true);
                         submitBreedButton.setText(R.string.next);

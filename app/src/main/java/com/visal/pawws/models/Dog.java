@@ -1,4 +1,4 @@
-package com.visal.mobilecoursework1.utils;
+package com.visal.pawws.models;
 
 import java.io.Serializable;
 
