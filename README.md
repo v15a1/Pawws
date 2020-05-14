@@ -13,7 +13,9 @@ Are you a fan of stepping out with your dog to the dog park on a usual day? Is t
 Pawws include 3 main features with 2 games inclusive, with timers. They are,
 
 **1. Identify Breeds** - A mini-game where the user has to select the breed of the dog.
+
 **2. Identify Dogs** - A mini-game where the user has to select the appropriate dog out of 3 images.
+
 **3. Search Breeds** - A search page where the user can type the name of a dog breed to have the app show a slideshow of images for the user to browse and learn
 
 **Timer** - Features 1 & 2 can be subjected to timing if chosen
