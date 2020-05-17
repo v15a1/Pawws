@@ -54,62 +54,6 @@ This is a page dedicated to learning more about a breed, and what they might loo
 
 ***
 
-## Sample code snippets
-
-1. Getting a random Dog
-
-    ```java
-    //method to get a random Dog object
-    public Dog getRandomDog() {
-        //using Random class to generate a random number
-        Random random = new Random();
-
-        //getting random indices
-        int randBreed = random.nextInt(dogBreeds.length);
-        int randDogNumIndex = random.nextInt(dogImageCount.length - 1) + 1;
-
-        String resource = dogBreeds[randBreed] + "_" + dogImageCount[randDogNumIndex];
-        return new Dog(dogDetails.get(dogBreeds[randBreed]), resource);
-    }
-    ```
-2. Getting a searched breed result
-    ```java
-
-    //method to display searched breed details
-    public String getSearchedBreedDetails(String searchValue) {
-        if (dogDetails.containsValue(searchValue)) {
-            Log.d(CLASS_NAME, "contains" + searchValue);
-            //traversing the map of breeds to get the details if found
-            for (Map.Entry entry : dogDetails.entrySet()) {
-                Log.d(CLASS_NAME, entry.toString());
-                if (entry.getValue().equals(searchValue)) {
-                    String breedKey = entry.getKey().toString();
-                    String resource = breedKey + "_" + (new Random().nextInt(dogBreeds.length - 1) + 1);
-                    Log.d(CLASS_NAME, resource);
-                    return resource;
-                }
-            }
-        }
-        return null;
-    }
-    ```
-3. Saving current state
-    ```java
-        //saving state
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putStringArrayList("uniqueDogBreedNames", (ArrayList<String>) uniqueDogBreedNames);
-        outState.putSerializable("uniqueDogs", (ArrayList<Dog>) uniqueDogs);
-        outState.putString("answer", answer);
-        outState.putInt("randomBreedIndex", randomBreedIndex);
-        outState.putLong("millisRemaining", millisRemaining);
-        outState.putBoolean("isAnswerSubmitted", isAnswerSubmitted);
-        outState.putBoolean("didCountDownStart", didCountDownStart);
-    }
-    ```
-***
-
 ## Installation
 
 Clone the repo, open the project in Android Studio, hit "Run". Done!
