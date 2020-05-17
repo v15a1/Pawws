@@ -44,9 +44,12 @@ public class DogDetails {
         dogDetails.put("n02106662", "German Shepard");
     }
 
+    //method to get a random Dog object
     public Dog getRandomDog() {
+        //using Random class to generate a random number
         Random random = new Random();
 
+        //getting random indices
         int randBreed = random.nextInt(dogBreeds.length);
         int randDogNumIndex = random.nextInt(dogImageCount.length - 1) + 1;
 
@@ -54,9 +57,11 @@ public class DogDetails {
         return new Dog(dogDetails.get(dogBreeds[randBreed]), resource);
     }
 
+    //method to display searched breed details
     public String getSearchedBreedDetails(String searchValue) {
         if (dogDetails.containsValue(searchValue)) {
             Log.d(CLASS_NAME, "contains" + searchValue);
+            //traversing the map of breeds to get the details if found
             for (Map.Entry entry : dogDetails.entrySet()) {
                 Log.d(CLASS_NAME, entry.toString());
                 if (entry.getValue().equals(searchValue)) {
