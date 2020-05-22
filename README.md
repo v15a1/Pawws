@@ -30,6 +30,7 @@ The purpose of the assesment was to test our understanding on the Android develo
 **Built on**
 
 * Android Studio 3.5.3
+* Figma
 
 ***
 
@@ -51,6 +52,26 @@ Timer can be enables for this game to make things a little bit more interesting.
 ### 3. Search Breeds
 
 This is a page dedicated to learning more about a breed, and what they might look like. Here the user can type whatever breed they want to learn more on, and when the "SEARCH" button a slide show of all the images of that specific breed are shown. The slideshow can be stopped with the press of the "STOP" button.
+
+#### Additional Features & Functionalities
+
+* **Custom Alert Dialogs** - Custom Alert dialogs were used to notify the user regarding information.
+
+    ![Alert dialogs to display the user](Documentation/alerts.png)
+
+* **Fool proofing** - The program contains necessary implementation to prevent the user from simply skipping a game screen without submitting an answer.
+
+    ![Foolproof implementation](Documentation/foolproofing.png)
+
+* **UI cues** - UI cues were implemented for better user experience. And to portray functionalities in a minimalistic manner
+
+    ![Use of UI Cues](Documentation/searchDogs.gif)
+
+* **Displaying a Splashscreen** - Implementing a splashscreen at the start of the application, for explosiveness 💥.
+
+    ![Splashscreen](Documentation/splashscreen.png)
+
+
 
 ***
 
